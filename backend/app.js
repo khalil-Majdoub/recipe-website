@@ -28,7 +28,7 @@ app.use(cors(corsOption));
 app.use(express.urlencoded({extended:false}));
 app.use(express.json());
 
-app.use('/',express.static(path.join(__dirname,'..','frontend1/build')));
+app.use('/',express.static(path.join(__dirname,'..','frontend/build')));
 app.use('/',require( "./routes/api/signuproutes"));
 app.use('/',require( "./routes/api/checkroute"));
 
