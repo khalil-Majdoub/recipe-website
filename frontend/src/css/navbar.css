@@ -43,10 +43,14 @@ button{
   cursor: pointer;
   box-shadow: 1px 1px 19px 5px rgba(0, 0, 0, 0.705);
   opacity: 0.8;
-  transition: opacity 0.1s ease-in;
+  transition: opacity 0.1s ease-in , box-shadow 0.1s ease-in-out;
 }
 button:hover{
   opacity: 1;
+}
+button:active{
+  box-shadow: 0px 0px 0px 0px ,
+    inset 1px 1px 10px 1px rgba(0, 0, 0, 0.705);
 }
 
 li a{

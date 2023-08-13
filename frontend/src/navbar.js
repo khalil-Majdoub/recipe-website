@@ -2,7 +2,7 @@ import React from "react";
 import logo from "./media/new logo.bd32996144276dcc79de.png";
 import "./css/navbar.css"
 
-const Navbar = () => {
+const Navbar = ({handlesignupwindow}) => {
   return (
     <div className="navbar-container">
       <div>
@@ -25,11 +25,12 @@ const Navbar = () => {
               <a href="/recipe" style={{ '--content-width': '63px', '--after-margin-right': '1063px'}}>recipe</a>
             </li>
             <li>
-              <button>signup</button>
+              <button onClick={handlesignupwindow}>signup</button>
             </li>
           </ul>
         </nav>
       </div>
+
     </div>
   );
 }

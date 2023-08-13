@@ -22,9 +22,7 @@ const handleNewUser = async (req, res) =>{
   }
 
 }
-// registerController.js
-// const User = require('../model/User');
-// ...
+
 
 const handleDuplicateCheck = async (req, res) => {
   let { emailValue, usernameValue } = req.query;
