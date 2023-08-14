@@ -1,9 +1,25 @@
 .sign-up-container{
-  min-width: max-content;
-  max-width: max-content;
   z-index: 1050;
-  
+  /* overflow: auto; */
+  border: black solid 2px;
+  border-radius: 13px;
+  width: min(430px,100%);
+  background-color: rgba(255, 255, 255, 0.5);
+  height: 430px;
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: center;
+}
+.close-span{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  background-color: blueviolet;
 }
 .close{
   cursor: pointer;
+  height: 20px;
+  width: 20px;
+  color: white;
 }

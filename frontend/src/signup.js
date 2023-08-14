@@ -6,7 +6,7 @@ import { faXmark} from "@fortawesome/free-solid-svg-icons";
 const Signup = ({onclose}) => {
   return (
     <div className="sign-up-container">
-      <span>
+      <span className="close-span">
         <FontAwesomeIcon icon={faXmark} className="close"  onClick={onclose}/>
       </span>
     </div>
