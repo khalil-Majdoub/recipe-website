@@ -1,8 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "./media/new logo.bd32996144276dcc79de.png";
 import "./css/navbar.css"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {faBars} from "@fortawesome/free-solid-svg-icons";
 
-const Navbar = ({handlesignupwindow}) => {
+
+const Navbar = ({handlesignupwindow, handlenav, onclose ,showsignup}) => {
+
+  const handle = () => {
+    if (showsignup){
+      onclose();
+      handlenav();
+    }else{
+      handlenav();
+    }
+
+  }
+
   return (
     <div className="navbar-container">
       <div>
@@ -11,6 +25,7 @@ const Navbar = ({handlesignupwindow}) => {
         </a>
       </div>
       <div className="nav-container">
+        <FontAwesomeIcon icon={faBars} className="menu-icon" onClick={handle}/>
         <nav className="nav">
           <ul>
             <li>
@@ -30,7 +45,6 @@ const Navbar = ({handlesignupwindow}) => {
           </ul>
         </nav>
       </div>
-
     </div>
   );
 }

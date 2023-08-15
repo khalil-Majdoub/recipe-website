@@ -9,6 +9,9 @@ const Signup = ({onclose}) => {
       <span className="close-span">
         <FontAwesomeIcon icon={faXmark} className="close"  onClick={onclose}/>
       </span>
+      <span className="register-span">
+        <p>register</p>
+      </span>
     </div>
   );
 }

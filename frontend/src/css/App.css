@@ -4,7 +4,7 @@
   height: 100svh;
   width: 100svw;
   background-size: cover;
-  
+  background-position: center;
 }
 .App::after{
   content: "";

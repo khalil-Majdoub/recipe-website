@@ -1,0 +1,38 @@
+.menu-container{
+  display: none;
+}
+@media (max-width: 662px){
+  .menu-container{
+    display: block;
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  .menu{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  .menu nav{
+    width: 100%;
+  }
+  .menu li{
+    padding-top: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .menu button{
+    margin-bottom: 20px;
+    /* padding: 15px; */
+    font-size: 18px;
+    background-color: transparent;
+    border: none;
+    font-weight: bold;
+  }
+  .menu a {
+    font-size: 20px;
+    font-weight: bold;
+  }
+}
