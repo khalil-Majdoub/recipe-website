@@ -8,12 +8,15 @@ import Menu from './menu';
 
 function App() {
   const [showsignup, setshowignup] = useState(false);
+
   const handlesignupwindow = () =>{
     setshowignup(true);
   }
+
   const onclose = () => {
     setshowignup(false);
   }
+
   const [shownav, setshownav] = useState(false);
 
   const handlenav = () => {
@@ -23,12 +26,35 @@ function App() {
       setshownav(true);
     }
   }
+
+  const [showRegister, setshowRegister] = useState(true);
+  const handleshowRegister = () =>{
+    
+    setshowRegister(false);
+  }
   return (
     <div className="App">
       <Router>
-        <Navbar  handlesignupwindow = {handlesignupwindow} handlenav={handlenav} onclose = {onclose} showsignup = {showsignup} />
-        {showsignup && <span className='width'> <Signup onclose={onclose} handlesignupwindow= {handlesignupwindow}/></span>}
-        <Menu shownav={shownav} handlesignupwindow={handlesignupwindow} handlenav={handlenav} />
+        <Navbar  
+          handlesignupwindow = {handlesignupwindow} 
+          handlenav={handlenav} 
+          onclose = {onclose} 
+          showsignup = {showsignup} 
+        />
+        {showsignup && (
+          <span className='width'> 
+            <Signup 
+              onclose={onclose} 
+              handlesignupwindow= {handlesignupwindow} 
+              showRegister = {showRegister} 
+              handleshowRegister = {handleshowRegister} />
+          </span>
+        )}
+        <Menu 
+          shownav={shownav} 
+          handlesignupwindow={handlesignupwindow} 
+          handlenav={handlenav} 
+        />
       </Router>
     </div>
   );
