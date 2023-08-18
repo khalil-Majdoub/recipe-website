@@ -8,8 +8,24 @@ const Register = ({showRegister, handleshowRegister}) => {
       <form>
         <ul>
           <li>
+          <label htmlFor="email">email</label>
+          <input type="email" id="email" className="email"/>
+          </li>
+          <li>
             <label htmlFor="username">username</label>
-            <input id="username" className="username"/>
+            <input type="text" id="username" className="username"/>
+          </li>
+          <li>
+            <label htmlFor="password">password</label>
+            <input type="password" id="password" className="password"/>
+          </li>
+          <li>
+            <p>
+              do you have account &nbsp;<span>login</span>
+            </p>
+          </li>
+          <li>
+            <button>register</button>
           </li>
         </ul>
       </form>
