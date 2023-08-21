@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import logo from "./media/new logo.bd32996144276dcc79de.png";
-import "./css/navbar.css"
+import "./css/navbar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faBars} from "@fortawesome/free-solid-svg-icons";
 
 
-const Navbar = ({handlesignupwindow, handlenav, onclose ,showsignup}) => {
+const Navbar = ({handlesignupwindow, handlenav, onclose,showsignup, handleShowRegister}) => {
 
   const handle = () => {
     if (showsignup){
@@ -14,7 +14,10 @@ const Navbar = ({handlesignupwindow, handlenav, onclose ,showsignup}) => {
     }else{
       handlenav();
     }
-
+  }
+  const handleSignUp = () =>{
+    handleShowRegister();
+    handlesignupwindow();
   }
 
   return (
@@ -40,7 +43,7 @@ const Navbar = ({handlesignupwindow, handlenav, onclose ,showsignup}) => {
               <a href="/recipe" style={{ '--content-width': '63px', '--after-margin-right': '1063px'}}>recipe</a>
             </li>
             <li>
-              <button onClick={handlesignupwindow}>signup</button>
+              <button onClick={handleSignUp} disabled = {showsignup} >signup</button>
             </li>
           </ul>
         </nav>

@@ -1,11 +1,11 @@
 .sign-up-container{
   z-index: 1050;
-  /* overflow: auto; */
+  overflow: auto;
   border: black solid 2px;
   border-radius: 13px;
   width: min(430px,100%);
   background-color: rgba(255, 255, 255, 0.5);
-  height:  500px;
+  /* height:  500px; */
   backdrop-filter: blur(10px);
 }
 .sign-up-container div{

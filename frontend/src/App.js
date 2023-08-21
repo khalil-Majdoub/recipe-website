@@ -28,8 +28,10 @@ function App() {
   }
 
   const [showRegister, setshowRegister] = useState(true);
-  const handleshowRegister = () =>{
-    
+  const handleShowRegister = () =>{
+    setshowRegister(true);
+  }
+  const handlehideRegister = () => {
     setshowRegister(false);
   }
   return (
@@ -40,6 +42,8 @@ function App() {
           handlenav={handlenav} 
           onclose = {onclose} 
           showsignup = {showsignup} 
+          showRegister = {showRegister}
+          handleShowRegister = {handleShowRegister}
         />
         {showsignup && (
           <span className='width'> 
@@ -47,7 +51,9 @@ function App() {
               onclose={onclose} 
               handlesignupwindow= {handlesignupwindow} 
               showRegister = {showRegister} 
-              handleshowRegister = {handleshowRegister} />
+              handleshowRegister = {handleShowRegister}
+              handlehideRegister = {handlehideRegister}
+            />
           </span>
         )}
         <Menu 

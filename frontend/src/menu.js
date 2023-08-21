@@ -25,7 +25,7 @@ const Menu = ({shownav, handlesignupwindow, handlenav}) => {
                 <a href="/recipe" style={{ '--content-width': '63px', '--after-margin-right': '1063px'}}>recipe</a>
               </li>
               <li>
-                <button onClick={handle} >signup</button>
+                <p onClick={handle} >signup</p>
               </li>
             </ul>
           </nav>
