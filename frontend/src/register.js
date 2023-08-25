@@ -4,43 +4,65 @@ import axios from "./axios";
 
 const REGISTERURL = '/';
 
-const Register = ({showRegister, handleshowRegister, onclose, handleLogin}) => {
+const Register = ({showRegister, handleshowRegister, 
+  onclose, 
+  handleLogin, 
+
+  handleEmailDe, 
+  handleNameDe, 
+  handleEmailFocus,
+  handleemailBlur,
+  emailFocus,
+  emailUsed,
+
+  handleusernameFocus,
+  handleusernameBlur,
+  usernameFocus,
+  nameUsed,
+
+  handlepasswordFocus,
+  handlepasswordBlur,
+  passwordFocus,
+
+  style
+  
+}) => {
 
   const [emailValue, setemailValue] = useState("");
   const [usernameValue, setusernameValue] = useState("");
   const [passwordValue, setpasswordValue] = useState("");
 
-  const [emailFocus, setemailFocus] = useState(false);
-  const [usernameFocus, setusernameFocus] = useState(false);
-  const [passwordFocus, setpasswordFocus] = useState(false);
+  // const [emailFocus, setemailFocus] = useState(false);
+  // const [usernameFocus, setusernameFocus] = useState(false);
+  // const [passwordFocus, setpasswordFocus] = useState(false);
 
-  const [emailUsed, setemailUsed]= useState(false);
-  const [nameUsed, setnameUsed] = useState(false);
+  // const [emailUsed, setemailUsed]= useState(false);
+  // const [nameUsed, setnameUsed] = useState(false);
 
-  const handleEmailFocus = () => {
-    setemailFocus(true);
-  }
-  const handleusernameFocus = () => {
-    setusernameFocus(true);
-  }
-  const handlepasswordFocus = () => {
-    setpasswordFocus(true);
-  }
+  // const handleEmailFocus = () => {
+  //   setemailFocus(true);
+  // }
+  // const handleusernameFocus = () => {
+  //   setusernameFocus(true);
+  // }
+  // const handlepasswordFocus = () => {
+  //   setpasswordFocus(true);
+  // }
 
-  const handleemailBlur = () => {
-    setemailFocus(false);
-    handleEmailDe();
+  // const handleemailBlur = () => {
+  //   setemailFocus(false);
+  //   handleEmailDe();
 
-  }
-  const handleusernameBlur = () => {
-    setusernameFocus(false);
-    handleNameDe();
+  // }
+  // const handleusernameBlur = () => {
+  //   setusernameFocus(false);
+  //   handleNameDe();
     
-  }
-  const handlepasswordBlur = () => {
-    setpasswordFocus(false);
+  // }
+  // const handlepasswordBlur = () => {
+  //   setpasswordFocus(false);
     
-  }
+  // }
 
   const handleEmailChange = (event) =>{
     setemailValue(event.target.value);
@@ -58,7 +80,7 @@ const Register = ({showRegister, handleshowRegister, onclose, handleLogin}) => {
       const response = await axios.post(REGISTERURL,
       JSON.stringify({emailValue, usernameValue, passwordValue}),
       {
-        Headers:{ 'Content-Type': 'application/json' },
+        headers:{ 'Content-Type': 'application/json' },
         withCredentials: true
       }
       )
@@ -70,43 +92,9 @@ const Register = ({showRegister, handleshowRegister, onclose, handleLogin}) => {
     }
     onclose();
   }
-  const handleEmailDe = async () => {
-    if (emailValue !== "") {
-      try {
-        const res = await axios.get("/check", {
-          params : {emailValue}
-        }); // Send the emailValue to the backend for checking
-        if (res.data.emailUsed) {
-          setemailUsed(true);
-        } else {
-          setemailUsed(false);
-        }
-      } catch (err) {
-        console.error(err);
-      }
-    }
-  };
-
-  const handleNameDe = async () => {
-    if (usernameValue !== "") {
-      try {
-        const res = await axios.get("/check", {
-          params : {usernameValue}
-        }); // Send the nameValue to the backend for checking
-        if (res.data.nameUsed) {
-          setnameUsed(true);
-        } else {
-          setnameUsed(false);
-        }
-      } catch (err) {
-        console.error(err);
-      }
-    }
-  };
-
-  const style = {
-    transform: 'translateY(-23px)',
-  }
+  // const style = {
+  //   transform: 'translateY(-23px)',
+  // }
   const find = emailValue.toLowerCase().includes('@')
   const disabled = passwordValue.length<8 || usernameValue.length<6 || nameUsed || !find|| emailUsed;
   return (
@@ -151,7 +139,7 @@ const Register = ({showRegister, handleshowRegister, onclose, handleLogin}) => {
           </li>
           <li>
             <p>
-              do you have account &nbsp;<span className="login-span" onClick={handleLogin}>login</span>
+              do you have an account &nbsp;<span className="login-span" onClick={handleLogin}>login</span>
             </p>
           </li>
           <li className="li-button">

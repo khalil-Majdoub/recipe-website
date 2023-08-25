@@ -1,10 +1,53 @@
-import React from "react";
+import React, { useState } from "react";
+import "./css/login.css"
+import axios from "./axios";
 
-const Login = () => {
+const Login = ({
+  handleLoginsubmit,
+
+  emailValue,
+  handleEmailChange, 
+  emailFocus, 
+  handleEmailFocus,
+  handleemailBlur,
+  emailUsed,
+
+  usernameValue,
+  handleUsernameChange,  
+  usernameFocus,
+  handleusernameFocus,
+  handleusernameBlur,
+  nameUsed,
+
+  passwordValue,
+  handlePasswordChange,
+  passwordFocus,
+  handlepasswordFocus,
+  handlepasswordBlur,
   
+  style, 
+  handlehideLogin
+}) => {
+  const handleLogin = async(event) => {
+    event.preventDefault();
+    try{
+      const res = axios('/login',{
+        params: {
+          emailValue:emailValue,
+          usernameValue: usernameValue,
+          passwordValue: passwordValue,
+        }
+      })
+    }catch(err){
+      console.error(err);
+    }
+
+  }
+  const [passwordUsed, setpasswordUsed] = useState(false);
+  const disableLogin = !passwordUsed|| !emailUsed || !nameUsed;
   return (
-    <div>
-      <form onSubmit={handleRegister}>
+    <div className="login-container">
+      <form onSubmit={handleLoginsubmit}>
         <ul>
           <li>
           <label htmlFor="email" style={emailFocus || emailValue !== "" ? style: undefined}>email</label>
@@ -15,7 +58,7 @@ const Login = () => {
             value={emailValue}
             onChange={handleEmailChange}
             onFocus={handleEmailFocus}
-            onBlur={handleemailBlur}
+            onBlur={handleLogin}
           />
           </li>
           <li>
@@ -27,7 +70,7 @@ const Login = () => {
               value={usernameValue}
               onChange={handleUsernameChange}
               onFocus={handleusernameFocus}
-              onBlur={handleusernameBlur}
+              onBlur={handleLogin}
             />
           </li>
           <li>
@@ -39,16 +82,16 @@ const Login = () => {
               value={passwordValue}
               onChange={handlePasswordChange}
               onFocus={handlepasswordFocus}
-              onBlur={handlepasswordBlur}
+              onBlur={handleLogin}
             />
           </li>
           <li>
             <p>
-              do you have account &nbsp;<span className="login-span" onClick={handleLogin}>login</span>
+              don't you have an account &nbsp;<span className="login-span" onClick={handlehideLogin}>Register</span>
             </p>
           </li>
           <li className="li-button">
-            <button onClick={handleRegister} type="submit" >register</button>
+            <button onClick={handleLoginsubmit} type="submit" disabled = {disableLogin} >Login</button>
           </li>
         </ul>
       </form>
