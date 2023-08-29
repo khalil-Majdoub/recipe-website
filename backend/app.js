@@ -7,7 +7,7 @@ const cors = require('cors');
 const mongoose =require('mongoose');
 const { config } = require('dotenv');
 const connectionDB = require('./config/conndb');
-const PORT = process.env.PORT || 3500;
+const PORT = process.env.PORT || 3501;
 
 // connect to mongoDb
 connectionDB();
@@ -31,6 +31,7 @@ app.use(express.json());
 app.use('/',express.static(path.join(__dirname,'..','frontend/build')));
 app.use('/',require( "./routes/api/signuproutes"));
 app.use('/',require( "./routes/api/checkroute"));
+app.use('/', require("./routes/api/loginroute"));
 
 
 

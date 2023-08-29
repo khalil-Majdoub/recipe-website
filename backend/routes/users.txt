@@ -1,0 +1,16 @@
+{
+  email: 'saski@gmail.com',
+  username: 'sasuki',
+  password: '$2b$12$8P0JewGTzpPvWib5AZXggOfBhvnSRDMqQc5d8234phEhLvI9eCc5y',
+  roles: { User: 2001 },
+  _id: new ObjectId("64e95256dc0688b2e9f8efee"),
+  __v: 0
+}
+{
+  email: 'itatchi@gmail.com',
+  username: 'itatchi',
+  password: '$2b$12$6dslAuIlostUzjr9O7/ucuZZun5af/r2jNDfB941qXQZlHP9/W73e',
+  roles: { User: 2001 },
+  _id: new ObjectId("64ea493a3ef2a46a177679e5"),
+  __v: 0
+}

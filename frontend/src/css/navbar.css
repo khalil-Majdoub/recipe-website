@@ -82,7 +82,7 @@ li a{
 .nav li a:hover::after{
   width: var(--content-width);
 }
-@media (max-width : 662px){
+@media (max-width : 683px){
   .nav {
     display: none;
   }

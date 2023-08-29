@@ -61,11 +61,25 @@ const Signup = ({onclose, handleshowRegister, showRegister, handlehideRegister})
     setshowLogin(true);
     handlehideRegister();
     setTopic('Login');
+    setemailValue("");
+    setusernameValue("");
+    setpasswordValue("");
+    setemailFocus(false);
+    setusernameFocus(false);
+    setpasswordFocus(false);
+
+
   }
   const handlehideLogin = () =>{
     setshowLogin(false);
     handleshowRegister();
-    setTopic('Register')
+    setTopic('Register');
+    setemailValue("");
+    setusernameValue("");
+    setpasswordValue("");
+    setemailFocus(false);
+    setusernameFocus(false);
+    setpasswordFocus(false);
   }
 
   const handleEmailDe = async () => {

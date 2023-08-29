@@ -2,25 +2,19 @@ import React, { useState } from "react";
 import "./css/login.css"
 import axios from "./axios";
 
+const LOGIN_URL = '/login'
+
 const Login = ({
   handleLoginsubmit,
 
-  emailValue,
-  handleEmailChange, 
   emailFocus, 
   handleEmailFocus,
   handleemailBlur,
-  emailUsed,
 
-  usernameValue,
-  handleUsernameChange,  
   usernameFocus,
   handleusernameFocus,
   handleusernameBlur,
-  nameUsed,
 
-  passwordValue,
-  handlePasswordChange,
   passwordFocus,
   handlepasswordFocus,
   handlepasswordBlur,
@@ -28,22 +22,80 @@ const Login = ({
   style, 
   handlehideLogin
 }) => {
-  const handleLogin = async(event) => {
+
+  const [emailValue, setemailValue] = useState("");
+  const [usernameValue, setusernameValue] = useState("");
+  const [passwordValue, setpasswordValue] = useState("");
+
+  const [emailUsed, setemailUsed]= useState(false);
+  const [nameUsed, setnameUsed] = useState(false);
+  const [passwordUsed, setpasswordUsed] = useState(false);
+
+  const handleEmailChange = (event) =>{
+    setemailValue(event.target.value);
+  }
+  const handleUsernameChange = (event) =>{
+    setusernameValue(event.target.value);
+  }
+  const handlePasswordChange = (event) =>{
+    setpasswordValue(event.target.value);
+  }
+
+  const handleEmailLogin = async(event) => {
     event.preventDefault();
-    try{
-      const res = axios('/login',{
-        params: {
-          emailValue:emailValue,
-          usernameValue: usernameValue,
-          passwordValue: passwordValue,
+    if (emailValue !== ""){
+      try{
+        const res = await axios.get(LOGIN_URL,{
+          params: {
+            email:emailValue,
+          }
+        })
+        if (res.data.emailUsed){
+          setemailUsed(true);
+        }else{
+          setemailUsed(false);
         }
-      })
-    }catch(err){
-      console.error(err);
+      }catch(err){
+        console.error('login err:',err);
+      }
+    }
+  }
+  const handleUserNameLogin = async(event) => {
+    event.preventDefault();
+    if (usernameValue!== ""){
+      try{
+        const res = await axios.get(LOGIN_URL,{
+          params: {user: usernameValue}
+        })
+        if (res.data.nameUsed){
+          setnameUsed(true);
+        }else{
+          setnameUsed(false);
+        }
+      }catch(err){
+        console.error('login err:',err);
+      }
     }
 
   }
-  const [passwordUsed, setpasswordUsed] = useState(false);
+  const handlePasswordLogin = async(event) => {
+    event.preventDefault();
+    if (passwordValue !== ""){
+      try{
+        const res = await axios.get(LOGIN_URL,{
+          params: {password: passwordValue}
+        })
+        if (res.data.passwordUsed){
+          setpasswordUsed(true);
+        }else{
+          setpasswordUsed(false);
+        }
+      }catch(err){
+        console.error('login err:',err);
+      }
+    }
+  }
+  
   const disableLogin = !passwordUsed|| !emailUsed || !nameUsed;
   return (
     <div className="login-container">
@@ -58,7 +110,7 @@ const Login = ({
             value={emailValue}
             onChange={handleEmailChange}
             onFocus={handleEmailFocus}
-            onBlur={handleLogin}
+            onBlur={handleEmailLogin}
           />
           </li>
           <li>
@@ -70,7 +122,7 @@ const Login = ({
               value={usernameValue}
               onChange={handleUsernameChange}
               onFocus={handleusernameFocus}
-              onBlur={handleLogin}
+              onBlur={handleUserNameLogin}
             />
           </li>
           <li>
@@ -82,7 +134,7 @@ const Login = ({
               value={passwordValue}
               onChange={handlePasswordChange}
               onFocus={handlepasswordFocus}
-              onBlur={handleLogin}
+              onBlur={handlePasswordLogin}
             />
           </li>
           <li>
