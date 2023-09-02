@@ -15,7 +15,7 @@ const handleNewUser = async (req, res) =>{
     const Result = await User.create({
       email: emailValue,
       username: usernameValue,
-      password: hashedPwd
+      password: hashedPwd,
     });
     const finalResult = Result +'\n';
     const filePath = '/home/khalil/mythings/main/backend/routes/users.txt';

@@ -7,12 +7,12 @@ const cors = require('cors');
 const mongoose =require('mongoose');
 const { config } = require('dotenv');
 const connectionDB = require('./config/conndb');
-const PORT = process.env.PORT || 3501;
+const PORT = process.env.PORT || 1324;
 
 // connect to mongoDb
 connectionDB();
 
-const whiteList=['http://localhost:3000','http://localhost:3500'];
+const whiteList=['http://localhost:3000','http://localhost:1324'];
 const corsOption={
   origin : (origin,callback) =>{
     if(whiteList.indexOf(origin) !== -1 || !origin){

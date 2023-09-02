@@ -1,43 +1,51 @@
 const User = require ('../model/User');
-const bcrypt = require ('bcrypt');
+const bcrypt = require('bcrypt');
 const fs = require('fs').promises;
 
+
 const LoginController = async (req, res ) => {
-  // let{emailValue, usernameValue, passwordValue} = req.query;
-  const email = req.query.email;
-  const user = req.query.user;
-  const password = req.query.password;
+  const {email, userName, password} = req.query;
+
   console.log('Received query parameters:', req.query);
-  try{
-    const findEmailId = await User.findOne({email : email}).select('_id').exec();
-    const Id = findEmailId ? findEmailId._id : null;
-    console.log(findEmailId);
-    console.log(Id)
+  if (email!== "" || userName !== "" || password!==""){
+    try{
+      const findEmailId = await User.findOne({email : email}).exec();
+      if (findEmailId !== null) {
+        const Id = findEmailId? findEmailId._id: null;
+        const userId = findEmailId? findEmailId.username: null;
+        const passwordId = findEmailId? findEmailId.password: null;
+        const userIdM = userId.toString().toLowerCase();
+        const compareName = userIdM === userName; // Note: This is a comparison, not case-insensitive comparison
+        const comparePass = await bcrypt.compare(password, passwordId);    
 
-    const response = {
-      emailUsed: false,
-      nameUsed: false,
-      passwordUsed: false,
-    }
-    if (!findEmailId) {
-      res.status(404).json({ message: 'User not found' , response});
-      console.log(res);
-      return;
-    }
-    // const usernameId = await User.findById(Id).select('username').exec();
-    // const passwordId = await User.findById(Id).select('password').exec();
-    // const ispasswordMatch = await bcrypt.compare(passwordValue, passwordId.password);
+        console.log(findEmailId);
+        console.log(Id);
+        console.log(userId);
+        console.log(compareName);
+        console.log(comparePass);
         
-        
-    res.json(response);
-    
-  
+        const response = {
+          emailUsed: !!findEmailId,
+          userUsed: !!compareName,
+          passUsed: !!comparePass,
+        }
+        res.json(response);
+      } else {
+        console.log('findEmailId is null.');
+      }
 
-    // res.status(200).json({ userId: user._id });
-  }catch (err) {
-    res.status(500).json({ message: err.message });
+      if (!findEmailId) {
+        res.status(404).json({ message: 'User not found' , response});
+        console.log(res);
+        return;
+      }
+
+    }catch(err){
+      console.error(err);
+    }
   }
-  
 }
 
-module.exports = LoginController
+module.exports = {
+  LoginController,
+}
