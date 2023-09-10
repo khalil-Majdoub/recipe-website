@@ -1,14 +1,12 @@
-// const { response } = require('express');
+
 const User = require ('../model/User');
 const bcrypt = require ('bcrypt');
 const fs = require('fs').promises;
-// const duplicate = require ("../routes/api/duplicate");
+
 
 const handleNewUser = async (req, res) =>{
   const {emailValue, usernameValue, passwordValue} = req.body;
-  // duplicate(emailValue, usernameValue);
   try{
-    // const duplicateResult = await duplicate.checkDuplicates(emailValue, usernameValue);
 
     const hashedPwd = await bcrypt.hash(passwordValue,12);
     

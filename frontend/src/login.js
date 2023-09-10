@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import "./css/login.css"
 import axios from "./axios";
 
@@ -38,13 +38,16 @@ const Login = ({
   const handleLogin = async() => {
     if (emailValue !== ""){
       try{
-        const res = await axios.get(LOGIN_URL,{
-          params: {
-            email:emailValue,
-            userName: user,
-            password: passwordValue,
-          }
-        })
+        const data = {
+          email:emailValue,
+          userName:user,
+          password:passwordValue
+        };
+        const res = await axios.post('/login',
+          JSON.stringify(data),{
+            headers: { 'Content-Type': 'application/json' },
+            withCredentials: true
+          });
         if (res.data.emailUsed){
           setemailUsed(true);
         }else{
@@ -68,16 +71,28 @@ const Login = ({
   }
   const handleEmailFocus = () => {
     setemailFocus(true);
-    handleLogin();
+    if (emailValue!=="")
+    {
+      handleLogin();
+    }
   }
   const handleusernameFocus = () => {
     setusernameFocus(true);
-    handleLogin();
-  }
+    if (usernameValue!==""){
+      handleLogin();
+    }
+  }    
   const handlepasswordFocus = () => {
     setpasswordFocus(true);
-    handleLogin();
+    if(passwordValue!==""){
+      handleLogin();
+    }
   }
+  useEffect(()=>{
+    handlepasswordFocus();
+    return (handlepasswordFocus)
+  },[passwordValue])
+  
 
   const handleemailBlur = () => {
     setemailFocus(false);

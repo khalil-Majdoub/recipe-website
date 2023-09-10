@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import logo from "./media/new logo.bd32996144276dcc79de.png";
 import "./css/navbar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faBars} from "@fortawesome/free-solid-svg-icons";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 
 const Navbar = ({handlesignupwindow, handlenav, onclose,showsignup, handleShowRegister}) => {
@@ -27,12 +28,16 @@ const Navbar = ({handlesignupwindow, handlenav, onclose,showsignup, handleShowRe
           <img src={logo} alt="logo"/>
         </a>
       </div>
+      <span >
+        <input type="text" id="search-input" placeholder="Search..."/>
+        <FontAwesomeIcon icon={faSearch} className="search-icon" />
+      </span>
       <div className="nav-container">
         <FontAwesomeIcon icon={faBars} className="menu-icon" onClick={handle}/>
         <nav className="nav">
           <ul>
             <li>
-              <a href="/" style={{ '--content-width': '56px', '--after-margin-right': '805px'}}>
+              <a href="/" style={{ '--content-width': '56px', '--after-margin-right': '35svw'}}>
                 home
               </a>
             </li>

@@ -7,8 +7,8 @@ const cors = require('cors');
 const mongoose =require('mongoose');
 const { config } = require('dotenv');
 const connectionDB = require('./config/conndb');
-const PORT = process.env.PORT || 1324;
-
+const PORT = process.env.PORT;
+// || :1324
 // connect to mongoDb
 connectionDB();
 

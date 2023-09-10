@@ -4,7 +4,7 @@ import axios from "./axios";
 
 const REGISTERURL = '/';
 
-const Register = ({showRegister, handleshowRegister, 
+const Register = ({
   onclose, 
   handleLogin, 
   style

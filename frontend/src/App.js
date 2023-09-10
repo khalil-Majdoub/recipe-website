@@ -1,10 +1,11 @@
 import React,{useState} from 'react';
 import './css/App.css';
-import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import Signup from './signup';
 import Navbar from './navbar';
 import Menu from './menu';
+import Home from './home';
 
 function App() {
   const [showsignup, setshowignup] = useState(false);
@@ -61,6 +62,9 @@ function App() {
           handlesignupwindow={handlesignupwindow} 
           handlenav={handlenav} 
         />
+        <Routes>
+          <Route path='/' exact Component={Home}/>
+        </Routes>
       </Router>
     </div>
   );

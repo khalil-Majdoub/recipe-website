@@ -22,6 +22,7 @@ const userSchema = new Schema ({
     Editor : Number,
     Admin : Number
   },
+  accessToken:String,
   refreshtoken : String
 });
 
