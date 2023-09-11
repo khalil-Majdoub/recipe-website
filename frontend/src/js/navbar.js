@@ -1,6 +1,6 @@
 import React from "react";
 import logo from "./media/new logo.bd32996144276dcc79de.png";
-import "./css/navbar.css";
+import "../css/navbar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faBars} from "@fortawesome/free-solid-svg-icons";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";

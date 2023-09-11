@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./css/signup.css";
+import "../css/signup.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark} from "@fortawesome/free-solid-svg-icons";
 import Register from "./register";
