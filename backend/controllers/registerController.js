@@ -19,6 +19,7 @@ const handleNewUser = async (req, res) =>{
     const filePath = '/home/khalil/mythings/main/backend/routes/users.txt';
     await fs.appendFile(filePath, finalResult, 'utf-8');
     res.status(201).json({'success': `new user have been created  ${usernameValue}`})
+    console.log('user have been created successfully');
   } catch (err){
     res.status(500).json({'message': err.message});
   }

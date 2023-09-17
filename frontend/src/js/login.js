@@ -1,21 +1,15 @@
-import React, { useState,useEffect } from "react";
-import "../css/login.css"
+import React, { useState, useEffect } from "react";
+import "../css/login.css";
 import axios from "./axios";
 
-const LOGIN_URL = '/login'
+const LOGIN_URL = "/login";
 
-const Login = ({
-  handleLoginsubmit,
-
-  style, 
-  handlehideLogin
-}) => {
-
+const Login = ({ handleLoginsubmit, style, handlehideLogin, check, setcheck }) => {
   const [emailValue, setemailValue] = useState("");
   const [usernameValue, setusernameValue] = useState("");
   const [passwordValue, setpasswordValue] = useState("");
 
-  const [emailUsed, setemailUsed]= useState(false);
+  const [emailUsed, setemailUsed] = useState(false);
   const [nameUsed, setnameUsed] = useState(false);
   const [passwordUsed, setpasswordUsed] = useState(false);
 
@@ -23,114 +17,121 @@ const Login = ({
   const [usernameFocus, setusernameFocus] = useState(false);
   const [passwordFocus, setpasswordFocus] = useState(false);
 
-  const handleEmailChange = (event) =>{
+  const handleEmailChange = (event) => {
     setemailValue(event.target.value);
-  }
-  const handleUsernameChange = (event) =>{
+  };
+  const handleUsernameChange = (event) => {
     setusernameValue(event.target.value);
-  }
-  const handlePasswordChange = (event) =>{
+  };
+  const handlePasswordChange = (event) => {
     setpasswordValue(event.target.value);
-  }
+  };
 
   const user = usernameValue.toString().toLowerCase();
 
-  const handleLogin = async() => {
-    if (emailValue !== ""){
-      try{
+  const Login = async () => {
+    if (emailValue !== "") {
+      try {
         const data = {
-          email:emailValue,
-          userName:user,
-          password:passwordValue
+          email: emailValue,
+          userName: user,
+          password: passwordValue,
         };
-        const res = await axios.post('/login',
-          JSON.stringify(data),{
-            headers: { 'Content-Type': 'application/json' },
-            withCredentials: true
-          });
-        if (res.data.emailUsed){
+        const res = await axios.post("/login", JSON.stringify(data), {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        });
+        if (res.data.emailUsed) {
           setemailUsed(true);
-        }else{
+        } else {
           setemailUsed(false);
         }
-        if (res.data.userUsed){
+        if (res.data.userUsed) {
           setnameUsed(true);
-        }else{
+        } else {
           setnameUsed(false);
         }
-        if (res.data.passUsed){
+        if (res.data.passUsed) {
           setpasswordUsed(true);
-        }else{
+        } else {
           setpasswordUsed(false);
         }
-
-      }catch(err){
-        console.error('login err:',err);
+        if (res.data.passUsed){
+          setcheck(true);
+        }else{
+          setcheck(false);
+        }
+      } catch (err) {
+        console.error("login err:", err);
       }
     }
-  }
+  };
+
+  useEffect(() => {
+    Login();
+  }, [passwordValue]);
+
   const handleEmailFocus = () => {
     setemailFocus(true);
-    if (emailValue!=="")
-    {
-      handleLogin();
+    if (emailValue !== "") {
+      Login();
     }
-  }
+  };
   const handleusernameFocus = () => {
     setusernameFocus(true);
-    if (usernameValue!==""){
-      handleLogin();
+    if (usernameValue !== "") {
+      Login();
     }
-  }    
+  };
   const handlepasswordFocus = () => {
     setpasswordFocus(true);
-    if(passwordValue!==""){
-      handleLogin();
+    if (passwordValue !== "") {
+      Login();
     }
-  }
-  useEffect(()=>{
-    handlepasswordFocus();
-    return (handlepasswordFocus)
-  },[passwordValue])
-  
+  };
 
   const handleemailBlur = () => {
     setemailFocus(false);
-    
-    
-  }
+  };
   const handleusernameBlur = () => {
     setusernameFocus(false);
-    
-  }
+  };
   const handlepasswordBlur = () => {
     setpasswordFocus(false);
-    
-  }
-  
-  
-  const disableLogin = !passwordUsed|| !emailUsed || !nameUsed;
+  };
+
+  const disableLogin = !passwordUsed || !emailUsed || !nameUsed;
   return (
     <div className="login-container">
       <form onSubmit={handleLoginsubmit}>
         <ul>
           <li>
-          <label htmlFor="email" style={emailFocus || emailValue !== "" ? style: undefined}>email</label>
-          <input 
-            type="email" 
-            id="email" 
-            className="email"
-            value={emailValue}
-            onChange={handleEmailChange}
-            onFocus={handleEmailFocus}
-            onBlur={handleemailBlur}
-          />
+            <label
+              htmlFor="email"
+              style={emailFocus || emailValue !== "" ? style : undefined}
+            >
+              email
+            </label>
+            <input
+              type="email"
+              id="email"
+              className="email"
+              value={emailValue}
+              onChange={handleEmailChange}
+              onFocus={handleEmailFocus}
+              onBlur={handleemailBlur}
+            />
           </li>
           <li>
-            <label htmlFor="username" style={usernameFocus || usernameValue !== "" ? style: undefined}>username</label>
-            <input 
-              type="text" 
-              id="username" 
+            <label
+              htmlFor="username"
+              style={usernameFocus || usernameValue !== "" ? style : undefined}
+            >
+              username
+            </label>
+            <input
+              type="text"
+              id="username"
               className="username"
               value={usernameValue}
               onChange={handleUsernameChange}
@@ -139,10 +140,15 @@ const Login = ({
             />
           </li>
           <li>
-            <label htmlFor="password" style={passwordFocus || passwordValue !== "" ? style: undefined}>password</label>
-            <input 
-              type="password" 
-              id="password" 
+            <label
+              htmlFor="password"
+              style={passwordFocus || passwordValue !== "" ? style : undefined}
+            >
+              password
+            </label>
+            <input
+              type="password"
+              id="password"
               className="password"
               value={passwordValue}
               onChange={handlePasswordChange}
@@ -152,16 +158,25 @@ const Login = ({
           </li>
           <li>
             <p>
-              don't you have an account &nbsp;<span className="login-span" onClick={handlehideLogin}>Register</span>
+              don't you have an account &nbsp;
+              <span className="login-span" onClick={handlehideLogin}>
+                Register
+              </span>
             </p>
           </li>
           <li className="li-button">
-            <button onClick={handleLoginsubmit} type="submit" disabled = {disableLogin} >Login</button>
+            <button
+              onClick={handleLoginsubmit}
+              type="submit"
+              disabled={disableLogin}
+            >
+              Login
+            </button>
           </li>
         </ul>
       </form>
     </div>
   );
-}
- 
+};
+
 export default Login;
