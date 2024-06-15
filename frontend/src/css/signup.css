@@ -1,33 +1,42 @@
-.sign-up-container{
+:root {
+  --primary-color: blueviolet;
+  --background-color: rgba(255, 255, 255, 0.5);
+  --text-color: black;
+  --highlight-color: white;
+}
+
+.sign-up-container {
   z-index: 1050;
   overflow: auto;
-  border: black solid 2px;
+  border: 2px solid black;
   border-radius: 13px;
-  width: min(430px,100%);
-  background-color: rgba(255, 255, 255, 0.5);
-  /* height:  500px; */
+  width: min(430px, 100%);
+  background-color: var(--background-color);
   backdrop-filter: blur(10px);
 }
-.sign-up-container div{
-  display: flex;
-} 
 
-.close-span{
+.sign-up-container div {
+  display: flex;
+}
+
+.close-span {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 30px;
   height: 40px;
-  border-radius: 10px 0px 10px 0px;
-  background-color: blueviolet;
+  border-radius: 10px 0 10px 0;
+  background-color: var(--primary-color);
 }
-.close{
+
+.close {
   cursor: pointer;
   height: 20px;
   width: 20px;
-  color: white;
+  color: var(--highlight-color);
 }
-.register-span{
+
+.register-span {
   width: 100%;
   display: flex;
   justify-content: center;
@@ -36,8 +45,7 @@
 }
 
 .register-span p {
-  color: black;
+  color: var(--text-color);
   font-size: x-large;
   font-weight: 600;
 }
-

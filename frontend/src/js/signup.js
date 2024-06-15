@@ -7,45 +7,29 @@ import Login from "./login";
 
 const Signup = ({
   onclose,
-  handleshowRegister,
-  showRegister,
-  handlehideRegister,
   check,
   setcheck,
 }) => {
+  const [showRegister, setshowRegister] = useState(true);
+
   const [emailValue, setemailValue] = useState("");
   const [usernameValue, setusernameValue] = useState("");
   const [passwordValue, setpasswordValue] = useState("");
 
-  const [emailFocus, setemailFocus] = useState(false);
-  const [usernameFocus, setusernameFocus] = useState(false);
-  const [passwordFocus, setpasswordFocus] = useState(false);
-
   const [showLogin, setshowLogin] = useState(false);
-  const [topic, setTopic] = useState("Register");
+  const [Head,setHead] = useState("Register")
 
-  const handleLogin = () => {
-    setshowLogin(true);
-    handlehideRegister();
-    setTopic("Login");
-    setemailValue("");
-    setusernameValue("");
-    setpasswordValue("");
-    setemailFocus(false);
-    setusernameFocus(false);
-    setpasswordFocus(false);
-  };
-  const handlehideLogin = () => {
+  //a solution
+  const register=()=>{
+    setshowRegister(true);
     setshowLogin(false);
-    handleshowRegister();
-    setTopic("Register");
-    setemailValue("");
-    setusernameValue("");
-    setpasswordValue("");
-    setemailFocus(false);
-    setusernameFocus(false);
-    setpasswordFocus(false);
-  };
+    setHead("Register")
+  }
+  const login = () => {
+    setshowRegister(false);
+    setshowLogin(true);
+    setHead("Login")
+  }
 
   const handleLoginsubmit = (event) => {
     event.preventDefault();
@@ -68,17 +52,21 @@ const Signup = ({
           <FontAwesomeIcon icon={faXmark} className="close" onClick={onclose} />
         </span>
         <span className="register-span">
-          <p>{topic}</p>
+          <p>{Head}</p>
         </span>
       </div>
       {showRegister && (
-        <Register onclose={onclose} handleLogin={handleLogin} style={style} />
+        <Register 
+          login={login}
+          onclose={onclose}  
+          style={style} 
+          />
       )}
       {showLogin && (
         <Login
+          register={register}
           handleLoginsubmit={handleLoginsubmit}
           style={style}
-          handlehideLogin={handlehideLogin}
           onclose={onclose}
           check={check}
           setcheck={setcheck}

@@ -2,65 +2,50 @@ import React, { useState, useEffect } from "react";
 import "../css/login.css";
 import axios from "./axios";
 
-const LOGIN_URL = "/login";
+const Login = ({ register, handleLoginsubmit, style, check, setCheck }) => {
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
-const Login = ({ handleLoginsubmit, style, handlehideLogin, check, setcheck }) => {
-  const [emailValue, setemailValue] = useState("");
-  const [usernameValue, setusernameValue] = useState("");
-  const [passwordValue, setpasswordValue] = useState("");
+  const [emailUsed, setEmailUsed] = useState(false);
+  const [usernameUsed, setUsernameUsed] = useState(false);
+  const [passwordUsed, setPasswordUsed] = useState(false);
 
-  const [emailUsed, setemailUsed] = useState(false);
-  const [nameUsed, setnameUsed] = useState(false);
-  const [passwordUsed, setpasswordUsed] = useState(false);
+  const [emailFocus, setEmailFocus] = useState(false);
+  const [usernameFocus, setUsernameFocus] = useState(false);
+  const [passwordFocus, setPasswordFocus] = useState(false);
+  const [topic, setTopic] = useState("Register");
 
-  const [emailFocus, setemailFocus] = useState(false);
-  const [usernameFocus, setusernameFocus] = useState(false);
-  const [passwordFocus, setpasswordFocus] = useState(false);
-
-  const handleEmailChange = (event) => {
-    setemailValue(event.target.value);
-  };
-  const handleUsernameChange = (event) => {
-    setusernameValue(event.target.value);
-  };
-  const handlePasswordChange = (event) => {
-    setpasswordValue(event.target.value);
+  const handleInputChange = (setter) => (event) => {
+    setter(event.target.value);
   };
 
-  const user = usernameValue.toString().toLowerCase();
+  const handleFocus = (setter) => () => {
+    setter(true);
+  };
 
-  const Login = async () => {
-    if (emailValue !== "") {
+  const handleBlur = (setter) => () => {
+    setter(false);
+  };
+
+  const user = username.toLowerCase();
+
+  const login = async () => {
+    if (email !== "") {
       try {
         const data = {
-          email: emailValue,
+          email,
           userName: user,
-          password: passwordValue,
+          password,
         };
         const res = await axios.post("/login", JSON.stringify(data), {
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
         });
-        if (res.data.emailUsed) {
-          setemailUsed(true);
-        } else {
-          setemailUsed(false);
-        }
-        if (res.data.userUsed) {
-          setnameUsed(true);
-        } else {
-          setnameUsed(false);
-        }
-        if (res.data.passUsed) {
-          setpasswordUsed(true);
-        } else {
-          setpasswordUsed(false);
-        }
-        if (res.data.passUsed){
-          setcheck(true);
-        }else{
-          setcheck(false);
-        }
+        setEmailUsed(res.data.emailUsed);
+        setUsernameUsed(res.data.userUsed);
+        setPasswordUsed(res.data.passUsed);
+        setCheck(res.data.passUsed);
       } catch (err) {
         console.error("login err:", err);
       }
@@ -68,39 +53,21 @@ const Login = ({ handleLoginsubmit, style, handlehideLogin, check, setcheck }) =
   };
 
   useEffect(() => {
-    Login();
-  }, [passwordValue]);
+    login();
+  }, [password]);
 
-  const handleEmailFocus = () => {
-    setemailFocus(true);
-    if (emailValue !== "") {
-      Login();
-    }
-  };
-  const handleusernameFocus = () => {
-    setusernameFocus(true);
-    if (usernameValue !== "") {
-      Login();
-    }
-  };
-  const handlepasswordFocus = () => {
-    setpasswordFocus(true);
-    if (passwordValue !== "") {
-      Login();
-    }
+  const handleHideLogin = () => {
+    setTopic("Register");
+    setEmail("");
+    setUsername("");
+    setPassword("");
+    setEmailFocus(false);
+    setUsernameFocus(false);
+    setPasswordFocus(false);
   };
 
-  const handleemailBlur = () => {
-    setemailFocus(false);
-  };
-  const handleusernameBlur = () => {
-    setusernameFocus(false);
-  };
-  const handlepasswordBlur = () => {
-    setpasswordFocus(false);
-  };
+  const disableLogin = !passwordUsed || !emailUsed || !usernameUsed;
 
-  const disableLogin = !passwordUsed || !emailUsed || !nameUsed;
   return (
     <div className="login-container">
       <form onSubmit={handleLoginsubmit}>
@@ -108,7 +75,7 @@ const Login = ({ handleLoginsubmit, style, handlehideLogin, check, setcheck }) =
           <li>
             <label
               htmlFor="email"
-              style={emailFocus || emailValue !== "" ? style : undefined}
+              style={emailFocus || email !== "" ? style : undefined}
             >
               email
             </label>
@@ -116,16 +83,17 @@ const Login = ({ handleLoginsubmit, style, handlehideLogin, check, setcheck }) =
               type="email"
               id="email"
               className="email"
-              value={emailValue}
-              onChange={handleEmailChange}
-              onFocus={handleEmailFocus}
-              onBlur={handleemailBlur}
+              value={email}
+              onChange={handleInputChange(setEmail)}
+              onFocus={handleFocus(setEmailFocus)}
+              onBlur={handleBlur(setEmailFocus)}
+              autoComplete="off"
             />
           </li>
           <li>
             <label
               htmlFor="username"
-              style={usernameFocus || usernameValue !== "" ? style : undefined}
+              style={usernameFocus || username !== "" ? style : undefined}
             >
               username
             </label>
@@ -133,16 +101,17 @@ const Login = ({ handleLoginsubmit, style, handlehideLogin, check, setcheck }) =
               type="text"
               id="username"
               className="username"
-              value={usernameValue}
-              onChange={handleUsernameChange}
-              onFocus={handleusernameFocus}
-              onBlur={handleusernameBlur}
+              value={username}
+              onChange={handleInputChange(setUsername)}
+              onFocus={handleFocus(setUsernameFocus)}
+              onBlur={handleBlur(setUsernameFocus)}
+              autoComplete="off"
             />
           </li>
           <li>
             <label
               htmlFor="password"
-              style={passwordFocus || passwordValue !== "" ? style : undefined}
+              style={passwordFocus || password !== "" ? style : undefined}
             >
               password
             </label>
@@ -150,16 +119,17 @@ const Login = ({ handleLoginsubmit, style, handlehideLogin, check, setcheck }) =
               type="password"
               id="password"
               className="password"
-              value={passwordValue}
-              onChange={handlePasswordChange}
-              onFocus={handlepasswordFocus}
-              onBlur={handlepasswordBlur}
+              value={password}
+              onChange={handleInputChange(setPassword)}
+              onFocus={handleFocus(setPasswordFocus)}
+              onBlur={handleBlur(setPasswordFocus)}
+              autoComplete="off"
             />
           </li>
           <li>
             <p>
               don't you have an account &nbsp;
-              <span className="login-span" onClick={handlehideLogin}>
+              <span className="login-span" onClick={() => { handleHideLogin(); register(); }}>
                 Register
               </span>
             </p>

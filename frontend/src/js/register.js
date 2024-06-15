@@ -5,8 +5,8 @@ import axios from "./axios";
 const REGISTERURL = '/';
 
 const Register = ({
+  login,
   onclose, 
-  handleLogin, 
   style
   
 }) => {
@@ -21,6 +21,9 @@ const Register = ({
 
   const [emailUsed, setemailUsed]= useState(false);
   const [nameUsed, setnameUsed] = useState(false);
+  const [topic, setTopic] = useState("Register");
+
+
 
   const handleEmailFocus = () => {
     setemailFocus(true);
@@ -109,6 +112,16 @@ const Register = ({
       }
     }
   };
+  const handleLogin = () => {
+    setTopic("Login");
+    setemailValue("");
+    setusernameValue("");
+    setpasswordValue("");
+    setemailFocus(false);
+    setusernameFocus(false);
+    setpasswordFocus(false);
+
+  };
   const find = emailValue.toLowerCase().includes('@')
   const disabled = passwordValue.length<8 || usernameValue.length<6 || nameUsed || !find|| emailUsed;
   return (
@@ -125,6 +138,7 @@ const Register = ({
             onChange={handleEmailChange}
             onFocus={handleEmailFocus}
             onBlur={handleemailBlur}
+            autoComplete="off"
           />
           </li>
           <li>
@@ -137,6 +151,7 @@ const Register = ({
               onChange={handleUsernameChange}
               onFocus={handleusernameFocus}
               onBlur={handleusernameBlur}
+              autoComplete="off"
             />
           </li>
           <li>
@@ -149,11 +164,12 @@ const Register = ({
               onChange={handlePasswordChange}
               onFocus={handlepasswordFocus}
               onBlur={handlepasswordBlur}
+              autoComplete="off"
             />
           </li>
           <li>
             <p>
-              do you have an account &nbsp;<span className="login-span" onClick={handleLogin}>login</span>
+              do you have an account &nbsp;<span className="login-span" onClick={()=>{handleLogin();login()}}>login</span>
             </p>
           </li>
           <li className="li-button">

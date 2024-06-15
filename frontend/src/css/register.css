@@ -1,45 +1,59 @@
-.register-container{
+:root {
+  --primary-color: darkorchid;
+  --font-size-large: 20px;
+  --font-size-medium: 18px;
+  --padding-small: 10px;
+  --padding-medium: 15px;
+  --border-radius-small: 6px;
+  --border-radius-medium: 10px;
+  --box-shadow: 0px 0px 20px 1px black;
+}
+
+.register-container {
   justify-content: center;
   padding-top: 20px;
 }
 
-.register-container ul{
+.register-container ul {
   list-style: none;
 }
-li{
+
+li {
   margin-top: 40px;
 }
-.li-button{
+
+.li-button {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-label{
-  font-size: 20px;
+
+label {
+  font-size: var(--font-size-large);
   font-weight: bold;
   position: absolute;
-  top: var();
   transform: translateY(10px);
   padding-left: 20px;
   transition: transform 0.2s ease-in-out;
 }
 
-input{
-  padding: 10px 0px 10px 10px;
-  font-size: 20px;
+input {
+  padding: var(--padding-small) 0 var(--padding-small) var(--padding-small);
+  font-size: var(--font-size-large);
   font-weight: bold;
   border: none;
   border-bottom: black solid 3px;
   background-color: transparent;
-  border-radius: 10px;
+  border-radius: var(--border-radius-medium);
   outline: none;
-  box-shadow: 0px 0px 20px 1px black;
+  box-shadow: var(--box-shadow);
   width: 100%;
 }
-button{
-  padding: 15px 17px 15px 17px;
-  border: darkorchid solid 2px ;
-  border-radius: 6px;
+
+button {
+  padding: var(--padding-medium) 17px;
+  border: var(--primary-color) solid 2px;
+  border-radius: var(--border-radius-small);
   background-color: transparent;
   font-size: 17px;
   font-weight: bold;
@@ -49,25 +63,28 @@ button{
   transition: opacity 0.2s ease-out;
   margin-bottom: 10px;
 }
-button:hover{
-  
+
+button:hover {
   opacity: 1;
 }
-button:disabled{
-  cursor:not-allowed;
+
+button:disabled {
+  cursor: not-allowed;
   box-shadow: none;
   opacity: 0.7;
 }
-button:active:disabled{
+
+button:active:disabled,
+button:hover:disabled {
   box-shadow: none;
-}
-button:hover:disabled{
   opacity: 0.7;
 }
+
 p {
-  font-size: 18px;
+  font-size: var(--font-size-medium);
 }
-.login-span{
+
+.login-span {
   text-decoration: underline;
   color: red;
   cursor: pointer;

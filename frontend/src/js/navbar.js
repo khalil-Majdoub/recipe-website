@@ -45,7 +45,7 @@ const Navbar = ({
                 href="/"
                 style={{
                   "--content-width": "56px",
-                  "--after-margin-right": "35svw",
+                  "--after-margin-right": "47.8svw",
                 }}
               >
                 home
@@ -56,7 +56,7 @@ const Navbar = ({
                 href="/about-us"
                 style={{
                   "--content-width": "85px",
-                  "--after-margin-right": "920px",
+                  "--after-margin-right": "57.8svw",
                 }}
               >
                 about us
@@ -67,7 +67,7 @@ const Navbar = ({
                 href="/recipe"
                 style={{
                   "--content-width": "63px",
-                  "--after-margin-right": "1063px",
+                  "--after-margin-right": "71.5svw",
                 }}
               >
                 recipe
